@@ -61,6 +61,29 @@ img {
     display: none;
 }
 
+.relogio {
+    /* Properties */
+    padding-top: 40px;
+    padding-bottom: 13px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    border-radius: nullpx;
+    
+
+    /* Typography */
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 56px;
+    line-height: 66px;
+    text-align: center;
+    letter-spacing: -0.004em;
+
+    color: #75B79E;
+}
+
 @media (max-width: 335px) {
     header {
         /* Typography */

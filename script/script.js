@@ -14,7 +14,7 @@ while ( (qntCartas%2 !== 0) || (qntCartas < 2) || (qntCartas > 14) ) {
 inserir as cartas viradas pra baixo na página 
 de forma que a distribuição seja aleatória */
 
-const cartasPossiveis = [`<div class="carta" onclick="virarCarta(this)"> <img class="paraBaixo" src="imagens/front.png" id="front"/> <img class="paraCima sumir" src="./imagens/bobrossparrot.gif" id="bobrossparrot"/> </div>`, `<div class="carta" onclick="virarCarta(this)"><img class="paraBaixo" src="imagens/front.png" id="front"/><img class="paraCima sumir" src="./imagens/explodyparrot.gif" id="explodyparrot"/></div>`, `<div class="carta" onclick="virarCarta(this)"><img class="paraBaixo" src="imagens/front.png" id="front"/><img class="paraCima sumir" src="./imagens/fiestaparrot.gif" id="fiestaparrot"/></div>`, `<div class="carta" onclick="virarCarta(this)"><img class="paraBaixo" src="imagens/front.png" id="front"/><img class="paraCima sumir" src="./imagens/metalparrot.gif" id="metalparrot"/></div>`, `<div class="carta" onclick="virarCarta(this)"><img class="paraBaixo" src="imagens/front.png" id="front"/><img class="paraCima sumir" src="./imagens/revertitparrot.gif" id="revertitparrot"/></div>`, `<div class="carta" onclick="virarCarta(this)"><img class="paraBaixo" src="imagens/front.png" id="front"/><img class="paraCima sumir" src="./imagens/tripletsparrot.gif" id="tripletsparrot"/></div>`, `<div class="carta" onclick="virarCarta(this)"><img class="paraBaixo" src="imagens/front.png" id="front"/><img class="paraCima sumir" src="./imagens/unicornparrot.gif" id="unicornparrot"/></div>`];
+const cartasPossiveis = [`<div class="carta" onclick="virarCarta(this)" data-identifier="card"> <img class="paraBaixo" data-identifier="back-face"src="imagens/front.png" id="front"/> <img class="paraCima sumir" data-identifier="front-face" src="./imagens/bobrossparrot.gif" id="bobrossparrot"/> </div>`, `<div class="carta" onclick="virarCarta(this)" data-identifier="card"><img class="paraBaixo" data-identifier="back-face"src="imagens/front.png" id="front"/><img class="paraCima sumir" data-identifier="front-face" src="./imagens/explodyparrot.gif" id="explodyparrot"/></div>`, `<div class="carta" onclick="virarCarta(this)" data-identifier="card"><img class="paraBaixo" data-identifier="back-face"src="imagens/front.png" id="front"/><img class="paraCima sumir" data-identifier="front-face" src="./imagens/fiestaparrot.gif" id="fiestaparrot"/></div>`, `<div class="carta" onclick="virarCarta(this)" data-identifier="card"><img class="paraBaixo" data-identifier="back-face"src="imagens/front.png" id="front"/><img class="paraCima sumir" data-identifier="front-face" src="./imagens/metalparrot.gif" id="metalparrot"/></div>`, `<div class="carta" onclick="virarCarta(this)" data-identifier="card"><img class="paraBaixo" data-identifier="back-face"src="imagens/front.png" id="front"/><img class="paraCima sumir" data-identifier="front-face" src="./imagens/revertitparrot.gif" id="revertitparrot"/></div>`, `<div class="carta" onclick="virarCarta(this)" data-identifier="card"><img class="paraBaixo" data-identifier="back-face"src="imagens/front.png" id="front"/><img class="paraCima sumir" data-identifier="front-face" src="./imagens/tripletsparrot.gif" id="tripletsparrot"/></div>`, `<div class="carta" onclick="virarCarta(this)" data-identifier="card"><img class="paraBaixo" data-identifier="back-face"src="imagens/front.png" id="front"/><img class="paraCima sumir" data-identifier="front-face" src="./imagens/unicornparrot.gif" id="unicornparrot"/></div>`];
 let cartasNoJogo = [];
 
 for(let i = 0; i < qntCartas/2; i++) {
@@ -41,7 +41,7 @@ function comparador() {
     /* 2) Caso seja uma carta diferente da primeira carta virada, o usuário errou. Nesse caso, o jogo deve aguardar 1 segundo e então virar as duas cartas para baixo novamente */
 /* Quando o usuário terminar de virar todas as cartas corretamente, deverá ser exibido um alert com a mensagem "Você ganhou em X jogadas!" sendo X a quantidade de vezes que o usuário virou uma carta no jogo. */
 
-    let contadorDeViradas = 0;
+let contadorDeViradas = 0;
 let matched = 0;
 
 function virarCarta(element) {
@@ -57,7 +57,15 @@ function virarCarta(element) {
             element.classList.add("matched");
             matched++;
             if (matched === qntCartas/2) {
-                alert(`Você ganhou em ${contadorDeViradas} jogadas!`);
+                clearInterval(relogio);
+                alert(`Você ganhou em ${contadorDeViradas} jogadas! E em ${cronometro} segundos!`);
+                let resposta = prompt(`Jogar novamente?`,);
+                while ((resposta !== "sim") && (resposta !== "Sim") && (resposta !== "s") && (resposta !== "S")) {
+                    resposta = prompt(`Voce quer jogar que eu sei. Deixa a timidez de lado e responde "s", "S", "sim" ou "Sim". E bora jogar!`);
+                }
+                if((resposta === "sim") || (resposta === "Sim") || (resposta === "s") || (resposta === "S")) {
+                    reiniciar();
+                }
             }
         } else {
             element.classList.add("unmatched");
@@ -75,6 +83,57 @@ function voltarParaBaixo() {
     document.querySelector(`.first`).classList.remove("first");
 }
 
+
+
+let relogio = setInterval(relogioJogo, 1000);
+let cronometro = 0;
+function relogioJogo() {
+    const elemento = document.querySelector(`.relogio`);
+    cronometro ++;
+    elemento.innerHTML = cronometro;
+}
+
+
+function reiniciar() {
+    /* perguntar ao usuario 
+    com quantas cartas quer jogar */
+    qntCartas = prompt("Bem vindo ao Parrot! Com quantas cartas quer jogar? (2, 4, 6, 8, 10, 12 ou 14)", );
+
+    /* O usuário só poderá inserir números pares no prompt, de 4 a 14.
+    Qualquer número que fuja a essa regra não deve ser aceito. 
+    No caso de números inválidos, o prompt deverá ficar sendo repetido,
+    até que o usuário coloque um número válido. */
+    while ( (qntCartas%2 !== 0) || (qntCartas < 2) || (qntCartas > 14) ) {
+        qntCartas = prompt("Escolha entre os seguintes números: 2, 4, 6, 8, 10, 12 ou 14");
+    }
+
+    /* Após inserir um número de cartas válido, o jogo deverá 
+    inserir as cartas viradas pra baixo na página 
+    de forma que a distribuição seja aleatória */
+    cartasNoJogo = [];
+
+    for(let i = 0; i < qntCartas/2; i++) {
+        cartasNoJogo.push(cartasPossiveis[i]);
+        cartasNoJogo.push(cartasPossiveis[i]);
+    }
+
+    cartasNoJogo.sort(comparador);
+
+    tabuleiro.innerHTML = `<div class="relogio"></div>`;
+
+    for(let i = 0; i < qntCartas; i++) {
+        tabuleiro.innerHTML += cartasNoJogo[i];
+    }
+
+    contadorDeViradas = 0;
+    matched = 0;
+    cronometro = 0;
+
+    relogio = setInterval(relogioJogo, 1000);
+
+
+
+}
 
 
 
