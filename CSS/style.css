@@ -48,6 +48,7 @@ main {
     background-color: #A7E9AF;
     border: 1px solid #99CEA8;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 img {
