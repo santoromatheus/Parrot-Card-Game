@@ -34,7 +34,18 @@ function comparador() {
     return Math.random() - 0.5;
 }
 
+/* Ao clicar em uma carta, a mesma deve ser virada */
+/* Caso seja a primeira carta do par, ela deve permanecer virada até o usuário escolher a segunda carta */
+/* Caso seja a segunda carta virada, existem 2 situações: */
+    /* 1) Caso seja igual à primeira carta, o usuário acertou e ambas agora devem ficar viradas pra cima até o final do jogo */
+    /* 2) Caso seja uma carta diferente da primeira carta virada, o usuário errou. Nesse caso, o jogo deve aguardar 1 segundo e então virar as duas cartas para baixo novamente */
+/* Quando o usuário terminar de virar todas as cartas corretamente, deverá ser exibido um alert com a mensagem "Você ganhou em X jogadas!" sendo X a quantidade de vezes que o usuário virou uma carta no jogo. */
+
+    let contadorDeViradas = 0;
+let matched = 0;
+
 function virarCarta(element) {
+    contadorDeViradas++;
     if( (element.classList.contains("first") === false) && (element.classList.contains("matched") === false)) {
         element.querySelector(`.paraBaixo`).classList.toggle("sumir");
         element.querySelector(`.paraCima`).classList.toggle("sumir");
@@ -44,6 +55,10 @@ function virarCarta(element) {
             document.querySelector(`.first`).classList.add("matched");
             document.querySelector(`.first`).classList.remove("first");
             element.classList.add("matched");
+            matched++;
+            if (matched === qntCartas/2) {
+                alert(`Você ganhou em ${contadorDeViradas} jogadas!`);
+            }
         } else {
             element.classList.add("unmatched");
             setTimeout(voltarParaBaixo, 1000);
