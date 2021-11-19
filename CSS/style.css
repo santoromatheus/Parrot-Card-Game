@@ -28,9 +28,11 @@ header {
     color: #75B79E;
 }
 
-.linha {
+main {
     /* Properties */
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .carta {
@@ -54,6 +56,10 @@ img {
     height: 100px;
 }
 
+.sumir {
+    display: none;
+}
+
 @media (max-width: 335px) {
     header {
         /* Typography */
@@ -61,7 +67,7 @@ img {
         line-height: 42.19px;
     }
 
-    .linha {
+    main {
         /* Properties */
         display: initial;
     }
