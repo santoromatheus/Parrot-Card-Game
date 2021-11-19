@@ -1,4 +1,5 @@
 body {
+    /* Properties */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,11 +28,7 @@ header {
     color: #75B79E;
 }
 
-main {
-    
-}
-
-.linha1, .linha2 {
+.linha {
     /* Properties */
     display: flex;
 }
@@ -41,7 +38,7 @@ main {
     width: 117px;
     height: 146px;
 
-    padding: 34px 17px 0px 17px;
+    margin: 34px 17px 0px 17px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,20 +49,19 @@ main {
 }
 
 img {
+    /* Properties */
     width: 100px;
     height: 100px;
 }
 
 @media (max-width: 335px) {
     header {
-
-    /* Typography */
-    font-size: 36px;
-    line-height: 42.19px;
-
+        /* Typography */
+        font-size: 36px;
+        line-height: 42.19px;
     }
 
-    .linha1, .linha2 {
+    .linha {
         /* Properties */
         display: initial;
     }
