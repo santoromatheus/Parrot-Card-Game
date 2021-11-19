@@ -1,0 +1,72 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+    background-color: #EEF9BF;
+}
+
+header {
+    /* Properties */
+    padding-top: 40px;
+    padding-bottom: 13px;
+
+    border-radius: nullpx;
+    
+
+    /* Typography */
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 56px;
+    line-height: 66px;
+    text-align: center;
+    letter-spacing: -0.004em;
+
+    color: #75B79E;
+}
+
+main {
+    
+}
+
+.linha1, .linha2 {
+    /* Properties */
+    display: flex;
+}
+
+.carta {
+    /* Properties */
+    width: 117px;
+    height: 146px;
+
+    padding: 34px 17px 0px 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    background-color: #A7E9AF;
+    border: 1px solid #99CEA8;
+    border-radius: 5px;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+}
+
+@media (max-width: 335px) {
+    header {
+
+    /* Typography */
+    font-size: 36px;
+    line-height: 42.19px;
+
+    }
+
+    .linha1, .linha2 {
+        /* Properties */
+        display: initial;
+    }
+}
